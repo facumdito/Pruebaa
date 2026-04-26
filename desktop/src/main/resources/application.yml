@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: rosario-realestate-desktop
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:rosario_re_local}?useSSL=false&serverTimezone=America/Argentina/Buenos_Aires&allowPublicKeyRetrieval=true
+    username: ${DB_USER:app}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+logging:
+  level:
+    ar.com.rosario.realestate: INFO
+    org.hibernate.SQL: WARN
+    org.springframework: WARN

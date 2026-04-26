@@ -7,11 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * JavaFX 21 desktop application entry point.
- * Theme: AtlantaFX PrimerLight. Auth: OAuth2 PKCE against cloud backend.
- * All reads/writes go to local MySQL; SyncManager drains outbox in background.
+ * JavaFX 21 entry point. Starts headless Spring Boot context before showing UI,
+ * so JPA repositories are available to all views.
  */
 public class DesktopApp extends Application {
+
+    @Override
+    public void init() {
+        AppContext.start();
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -22,6 +26,11 @@ public class DesktopApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+        AppContext.close();
     }
 
     public static void main(String[] args) {

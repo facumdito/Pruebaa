@@ -16,6 +16,6 @@ public class PersistenceConfig {
     @Bean
     public HibernatePropertiesCustomizer multiTenancyCustomizer(TenantIdentifierResolver resolver) {
         return properties ->
-            properties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, resolver);
+                properties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, resolver);
     }
 }
