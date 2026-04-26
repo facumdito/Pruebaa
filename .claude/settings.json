@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Write(.env*)",
+      "Write(*.pem)",
+      "Write(*.p12)",
+      "Write(*.jks)",
+      "Write(application-secrets*)",
+      "Write(**/src/main/resources/application-local*)"
+    ]
+  }
+}
