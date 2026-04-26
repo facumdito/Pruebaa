@@ -250,13 +250,6 @@
         <version>${thumbnailator.version}</version>
       </dependency>
 
-      <!-- Payments -->
-      <dependency>
-        <groupId>com.mercadopago</groupId>
-        <artifactId>sdk-java</artifactId>
-        <version>${mercadopago.version}</version>
-      </dependency>
-
       <!-- Routing -->
       <dependency>
         <groupId>com.google.ortools</groupId>
@@ -283,6 +276,11 @@
         <groupId>io.sentry</groupId>
         <artifactId>sentry-logback</artifactId>
         <version>${sentry.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.resilience4j</groupId>
+        <artifactId>resilience4j-spring-boot3</artifactId>
+        <version>2.2.0</version>
       </dependency>
 
       <!-- Architecture testing -->

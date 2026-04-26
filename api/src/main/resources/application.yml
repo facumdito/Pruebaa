@@ -25,14 +25,49 @@ spring:
 server:
   port: ${PORT:8080}
 
+# Observability — Phase 19
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
   endpoint:
     health:
       show-details: when-authorized
+    prometheus:
+      access: unrestricted
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+    tags:
+      application: ${spring.application.name}
+      environment: ${APP_ENV:local}
+
+sentry:
+  dsn: ${SENTRY_DSN:}
+  environment: ${APP_ENV:local}
+  traces-sample-rate: 0.2
+  send-default-pii: false
+
+# WhatsApp Cloud API — Phase 10
+whatsapp:
+  token: ${WHATSAPP_TOKEN:}
+  phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID:}
+  verify-token: ${WHATSAPP_VERIFY_TOKEN:rosario-dev}
+
+# MercadoPago — Phase 17
+mercadopago:
+  access-token: ${MP_ACCESS_TOKEN:}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      dolarApi:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 60s
+        permitted-number-of-calls-in-half-open-state: 2
 
 logging:
   level:

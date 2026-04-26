@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; color: #222; margin: 20px; }
+    h1 { font-size: 18px; color: #1a3a5c; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 11px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+    td:first-child { font-weight: bold; width: 40%; color: #444; }
+    .precio { font-size: 20px; font-weight: bold; color: #1a3a5c; margin: 16px 0 8px 0; }
+    .footer { margin-top: 30px; font-size: 10px; color: #aaa; text-align: center; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px;
+             background: #e8f4fd; color: #1a3a5c; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1 th:text="${propiedad.direccion}">Dirección</h1>
+  <div class="sub">
+    <span class="badge" th:text="${propiedad.tipo}">TIPO</span>
+    <span class="badge" th:text="${propiedad.operacion}">OP</span>
+    <span th:if="${propiedad.barrio}" th:text="'· ' + ${propiedad.barrio.nombre()}"></span>
+  </div>
+
+  <div class="precio" th:if="${propiedad.precioUsd}">
+    USD <span th:text="${#numbers.formatDecimal(propiedad.precioUsd, 1, 'COMMA', 0, 'POINT')}">0</span>
+  </div>
+
+  <table>
+    <tr th:if="${propiedad.m2Cubiertos}">
+      <td>Superficie cubierta</td>
+      <td th:text="${propiedad.m2Cubiertos} + ' m²'"></td>
+    </tr>
+    <tr th:if="${propiedad.m2Totales}">
+      <td>Superficie total</td>
+      <td th:text="${propiedad.m2Totales} + ' m²'"></td>
+    </tr>
+    <tr th:if="${propiedad.ambientes > 0}">
+      <td>Ambientes</td>
+      <td th:text="${propiedad.ambientes}"></td>
+    </tr>
+    <tr th:if="${propiedad.dormitorios > 0}">
+      <td>Dormitorios</td>
+      <td th:text="${propiedad.dormitorios}"></td>
+    </tr>
+    <tr th:if="${propiedad.banos > 0}">
+      <td>Baños</td>
+      <td th:text="${propiedad.banos}"></td>
+    </tr>
+    <tr th:if="${propiedad.cocheras > 0}">
+      <td>Cocheras</td>
+      <td th:text="${propiedad.cocheras}"></td>
+    </tr>
+    <tr th:if="${propiedad.antiguedadAnios > 0}">
+      <td>Antigüedad</td>
+      <td th:text="${propiedad.antiguedadAnios} + ' años'"></td>
+    </tr>
+    <tr th:if="${propiedad.descripcion}">
+      <td>Descripción</td>
+      <td th:text="${propiedad.descripcion}"></td>
+    </tr>
+  </table>
+
+  <div class="footer">
+    Generado el <span th:text="${#temporals.formatISO(#temporals.createNow())}"></span> ·
+    Rosario Real Estate SaaS · Información confidencial
+  </div>
+</body>
+</html>
